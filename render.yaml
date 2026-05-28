@@ -1,0 +1,137 @@
+databases:
+  - name: apex-accounting-db
+    databaseName: akaunting
+    user: akaunting
+    plan: starter
+
+services:
+  # Main Web Service for Laravel
+  - type: web
+    name: apex-accounting-web
+    env: docker
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: APP_NAME
+        value: "Apex Accounting"
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_DEBUG
+        value: false
+      - key: APP_URL
+        value: "https://apex-accounting-web.onrender.com"
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-accounting-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-accounting-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: apex-accounting-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: apex-accounting-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-accounting-db
+          property: password
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_DRIVER
+        value: file
+      - key: SESSION_DRIVER
+        value: file
+      - key: AI_PROVIDER
+        value: gemini
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GROQ_MODEL
+        value: llama-3.2-11b-vision-preview
+
+  # Background Worker for AI processing
+  - type: worker
+    name: apex-accounting-worker
+    env: docker
+    plan: starter
+    dockerCommand: "php artisan queue:work --timeout=300 --tries=3"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        fromService:
+          type: web
+          name: apex-accounting-web
+          property: envVar
+          envVarKey: APP_KEY
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-accounting-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-accounting-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: apex-accounting-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: apex-accounting-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-accounting-db
+          property: password
+      - key: QUEUE_CONNECTION
+        value: database
+
+  # Cron job for Weekly Financial Insights
+  - type: cron
+    name: apex-accounting-cron
+    env: docker
+    plan: free
+    schedule: "0 9 * * 1" # Every Monday at 9:00 AM
+    dockerCommand: "php artisan schedule:run"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        fromService:
+          type: web
+          name: apex-accounting-web
+          property: envVar
+          envVarKey: APP_KEY
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: apex-accounting-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: apex-accounting-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: apex-accounting-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: apex-accounting-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: apex-accounting-db
+          property: password
