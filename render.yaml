@@ -8,10 +8,9 @@ services:
   # Main Web Service for Laravel
   - type: web
     name: apex-accounting-web
-    env: php
+    env: docker
     plan: starter
-    buildCommand: "composer install --no-dev --optimize-autoloader && php artisan config:clear && php artisan migrate --force"
-    startCommand: "heroku-php-nginx public/"
+    healthCheckPath: /
     envVars:
       - key: APP_NAME
         value: "Apex Accounting"
@@ -63,10 +62,9 @@ services:
   # Background Worker for AI processing
   - type: worker
     name: apex-accounting-worker
-    env: php
+    env: docker
     plan: starter
-    buildCommand: "composer install --no-dev --optimize-autoloader"
-    startCommand: "php artisan queue:work --timeout=300 --tries=3"
+    dockerCommand: "php artisan queue:work --timeout=300 --tries=3"
     envVars:
       - key: APP_ENV
         value: production
@@ -74,7 +72,6 @@ services:
         fromService:
           type: web
           name: apex-accounting-web
-          property: envVar
           envVarKey: APP_KEY
       - key: DB_CONNECTION
         value: pgsql
@@ -104,11 +101,10 @@ services:
   # Cron job for Weekly Financial Insights
   - type: cron
     name: apex-accounting-cron
-    env: php
-    plan: free
+    env: docker
+    plan: starter
     schedule: "0 9 * * 1" # Every Monday at 9:00 AM
-    buildCommand: "composer install --no-dev --optimize-autoloader"
-    startCommand: "php artisan schedule:run"
+    dockerCommand: "php artisan schedule:run"
     envVars:
       - key: APP_ENV
         value: production
@@ -116,7 +112,6 @@ services:
         fromService:
           type: web
           name: apex-accounting-web
-          property: envVar
           envVarKey: APP_KEY
       - key: DB_CONNECTION
         value: pgsql
