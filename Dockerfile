@@ -17,6 +17,9 @@ ENV PHP_MAX_EXECUTION_TIME=300
 RUN chown -R application:application /app/storage /app/bootstrap/cache
 RUN chmod -R 775 /app/storage /app/bootstrap/cache
 
+# Remove any locally cached configurations
+RUN rm -f /app/bootstrap/cache/*.php
+
 # Set script to run before Nginx starts to clear cache and migrate
 # (This runs automatically on container start)
 COPY render-build.sh /opt/docker/provision/entrypoint.d/20-render-build.sh
