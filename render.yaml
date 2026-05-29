@@ -10,7 +10,7 @@ services:
     name: apex-accounting-web
     env: docker
     plan: free
-    healthCheckPath: /
+    healthCheckPath: /auth/login
     envVars:
       - key: APP_NAME
         value: "Apex Accounting"
