@@ -7,6 +7,13 @@
  * @link        https://akaunting.com
  */
 
+// Render Health Check Fast-Path
+if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] === '/health') {
+    http_response_code(200);
+    echo "OK";
+    exit;
+}
+
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
