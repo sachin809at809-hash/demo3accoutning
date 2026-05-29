@@ -61,11 +61,11 @@ HAS_USERS=$(php -r "
 if [ "$HAS_USERS" == "0" ]; then
     echo "Database is empty. Running initial Akaunting installation..."
     php artisan install \
-        --db-host="${DB_HOST}" \
+        --db-host="${DB_HOST:-""}" \
         --db-port="${DB_PORT:-5432}" \
-        --db-name="${DB_DATABASE}" \
-        --db-username="${DB_USERNAME}" \
-        --db-password="${DB_PASSWORD}" \
+        --db-name="${DB_DATABASE:-""}" \
+        --db-username="${DB_USERNAME:-""}" \
+        --db-password="${DB_PASSWORD:-""}" \
         --company-name="${APP_NAME:-Apex Accounting}" \
         --company-email="admin@example.com" \
         --admin-email="admin@example.com" \
