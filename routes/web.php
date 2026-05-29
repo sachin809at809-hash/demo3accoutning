@@ -14,9 +14,3 @@ use Livewire\Livewire;
 
     return Route::get($base . '/vendor/livewire/livewire/dist/livewire.min.js', $handle);
 });
-
-Route::get('/health', function () { return response('OK', 200); });
-
-
-Route::get('/env-debug', function () { return response()->json(\); });
-
