@@ -5,7 +5,7 @@
 
     <x-slot name="content">
         <div>
-            <img src="{{ asset('public/img/akaunting-logo-green.svg') }}" class="w-16" alt="{{ config('app.name') }}" />
+            <img src="{{ asset('public/img/apex-logo.png') }}" class="w-16" alt="{{ config('app.name') }}" />
 
             <h1 class="text-lg my-3">
                 {{ trans('auth.reset_password') }}

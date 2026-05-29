@@ -30,7 +30,7 @@
 <meta name="msapplication-TileImage" content="{{ asset('public/img/pwa/icon-512x512.png') }}">
 
 <script type="text/javascript">
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{{ asset('serviceworker.js') }}");
-    }
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register("{{ asset('serviceworker.js') }}");
+// }
 </script>

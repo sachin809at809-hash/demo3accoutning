@@ -1,12 +1,12 @@
-<div x-data="{ showPassword: false, password: '' }" x-cloak>
+<div x-data="{ showPassword: false, password: '' }" class="relative w-full mt-1">
     <input 
         type="password"
-        x-bind:class="password ? 'ltr:pr-9 rtl:pl-9' : 'ltr:pr-0 rtl:pl-0'"
+        x-bind:class="password ? 'pr-9' : 'pr-0'"
         x-bind:type="showPassword ? 'text' : 'password'"
         x-model="password"
         name="{{ $name }}"
         id="{{ $id }}"
-        class="relative w-full text-sm px-3 py-2.5 mt-1 rounded-lg border border-light-gray text-black placeholder-light-gray bg-white disabled:bg-gray-200 focus:outline-none focus:ring-transparent focus:border-purple"
+        class="w-full text-sm px-3 py-2.5 rounded-lg border border-light-gray text-black placeholder-light-gray bg-white disabled:bg-gray-200 focus:outline-none focus:ring-transparent focus:border-purple"
         @if ($value)
         value="{!! $value !!}"
         @endif
@@ -25,7 +25,7 @@
 
     <button 
         type="button" 
-        class="absolute inset-y-0 top-7 ltr:right-0 rtl:left-0 flex items-center ltr:pr-3 rtl:pl-3 text-gray-400"
+        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400"
         x-on:click="showPassword = !showPassword" x-show="password"
     >
         <span x-show="!showPassword" class="material-icons-outlined text-gray-500 text-lg">visibility_off</span>

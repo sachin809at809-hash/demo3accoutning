@@ -1,45 +1,20 @@
-var staticCacheName = "pwa-v" + new Date().getTime();
-var filesToCache = [
-    'public/img/pwa/icon-192x192.png',
-    'public/img/pwa/icon-512x512.png'
-];
-
-/*
-// Cache on install
-self.addEventListener("install", event => {
-    this.skipWaiting();
-    event.waitUntil(
-        caches.open(staticCacheName)
-            .then(cache => {
-                return cache.addAll(filesToCache);
-            })
-    )
+// Empty Service Worker to automatically override and unregister any broken cached workers
+self.addEventListener('install', function(event) {
+    self.skipWaiting();
 });
-*/
-/*
-// Clear cache on activate
-self.addEventListener('activate', event => {
+
+self.addEventListener('activate', function(event) {
     event.waitUntil(
-        caches.keys().then(cacheNames => {
+        caches.keys().then(function(cacheNames) {
             return Promise.all(
-                cacheNames
-                    .filter(cacheName => (cacheName.startsWith("pwa-")))
-                    .filter(cacheName => (cacheName !== staticCacheName))
-                    .map(cacheName => caches.delete(cacheName))
+                cacheNames.map(function(cacheName) {
+                    return caches.delete(cacheName);
+                })
             );
         })
     );
-});*/
-
-// Serve from Cache
-self.addEventListener("fetch", event => {
-    event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                return response || fetch(event.request);
-            })
-            .catch(() => {
-                return caches.match('offline');
-            })
-    )
+    self.clients.claim();
 });
+
+// Immediately unregister this service worker
+self.registration.unregister();
