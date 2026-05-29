@@ -45,6 +45,13 @@ php artisan cache:clear || true
 php artisan view:clear || true
 
 # 3. Handle Database Installation / Migrations
+if [ -z "${DB_HOST:-}" ]; then
+    echo "ERROR: DB_HOST environment variable is not set!"
+    echo "Please configure the database environment variables in your Render Dashboard."
+    echo "You need: DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD."
+    exit 1
+fi
+
 # We check if the users table exists and has rows to determine if the app is already installed.
 HAS_USERS=$(php -r "
     require 'vendor/autoload.php';
@@ -61,11 +68,11 @@ HAS_USERS=$(php -r "
 if [ "$HAS_USERS" == "0" ]; then
     echo "Database is empty. Running initial Akaunting installation..."
     php artisan install \
-        --db-host="${DB_HOST:-""}" \
+        --db-host="${DB_HOST}" \
         --db-port="${DB_PORT:-5432}" \
-        --db-name="${DB_DATABASE:-""}" \
-        --db-username="${DB_USERNAME:-""}" \
-        --db-password="${DB_PASSWORD:-""}" \
+        --db-name="${DB_DATABASE}" \
+        --db-username="${DB_USERNAME}" \
+        --db-password="${DB_PASSWORD}" \
         --company-name="${APP_NAME:-Apex Accounting}" \
         --company-email="admin@example.com" \
         --admin-email="admin@example.com" \
