@@ -15,28 +15,31 @@ VALID_APP_KEY=$(php -r "
     }
 ")
 
-# 2. Rebuild the .env file
-# We completely rebuild the .env file on every container boot using the Render Env Vars.
-echo "APP_NAME=\"${APP_NAME:-"Apex Accounting"}\"" > /app/.env
-echo "APP_ENV=\"${APP_ENV:-"production"}\"" >> /app/.env
-echo "APP_KEY=\"${VALID_APP_KEY}\"" >> /app/.env
-echo "APP_INSTALLED=\"true\"" >> /app/.env
-echo "APP_DEBUG=\"true\"" >> /app/.env
-echo "APP_URL=\"${RENDER_EXTERNAL_URL:-${APP_URL:-"https://apex-accounting-web.onrender.com"}}\"" >> /app/.env
-echo "DB_CONNECTION=\"${DB_CONNECTION:-"pgsql"}\"" >> /app/.env
-echo "DB_HOST=\"${DB_HOST:-""}\"" >> /app/.env
-echo "DB_PORT=\"${DB_PORT:-"5432"}\"" >> /app/.env
-echo "DB_DATABASE=\"${DB_DATABASE:-""}\"" >> /app/.env
-echo "DB_USERNAME=\"${DB_USERNAME:-""}\"" >> /app/.env
-echo "DB_PASSWORD=\"${DB_PASSWORD:-""}\"" >> /app/.env
-echo "QUEUE_CONNECTION=\"${QUEUE_CONNECTION:-"database"}\"" >> /app/.env
-echo "CACHE_DRIVER=\"${CACHE_DRIVER:-"file"}\"" >> /app/.env
-echo "SESSION_DRIVER=\"${SESSION_DRIVER:-"file"}\"" >> /app/.env
-echo "AI_PROVIDER=\"${AI_PROVIDER:-"gemini"}\"" >> /app/.env
-echo "LOG_CHANNEL=stderr" >> /app/.env
+# 2. Rebuild the .env file function
+generate_env() {
+    echo "APP_NAME=\"${APP_NAME:-"Apex Accounting"}\"" > /app/.env
+    echo "APP_ENV=\"${APP_ENV:-"production"}\"" >> /app/.env
+    echo "APP_KEY=\"${VALID_APP_KEY}\"" >> /app/.env
+    echo "APP_INSTALLED=\"true\"" >> /app/.env
+    echo "APP_DEBUG=\"true\"" >> /app/.env
+    echo "APP_URL=\"${RENDER_EXTERNAL_URL:-${APP_URL:-"https://apex-accounting-web.onrender.com"}}\"" >> /app/.env
+    echo "DB_CONNECTION=\"${DB_CONNECTION:-"pgsql"}\"" >> /app/.env
+    echo "DB_HOST=\"${DB_HOST:-""}\"" >> /app/.env
+    echo "DB_PORT=\"${DB_PORT:-"5432"}\"" >> /app/.env
+    echo "DB_DATABASE=\"${DB_DATABASE:-""}\"" >> /app/.env
+    echo "DB_USERNAME=\"${DB_USERNAME:-""}\"" >> /app/.env
+    echo "DB_PASSWORD=\"${DB_PASSWORD:-""}\"" >> /app/.env
+    echo "QUEUE_CONNECTION=\"${QUEUE_CONNECTION:-"database"}\"" >> /app/.env
+    echo "CACHE_DRIVER=\"${CACHE_DRIVER:-"file"}\"" >> /app/.env
+    echo "SESSION_DRIVER=\"${SESSION_DRIVER:-"file"}\"" >> /app/.env
+    echo "AI_PROVIDER=\"${AI_PROVIDER:-"gemini"}\"" >> /app/.env
+    echo "LOG_CHANNEL=stderr" >> /app/.env
+    chmod 644 /app/.env
+}
 
-# Fix permissions
-chmod 644 /app/.env
+# Generate it for the pre-flight checks
+generate_env
+
 chmod -R 777 /app/bootstrap/cache || true
 chmod -R 777 /app/storage/framework/cache || true
 
@@ -86,10 +89,9 @@ if [ "$HAS_USERS" == "0" ]; then
         --admin-password="password" \
         --no-interaction
 
-    # The installer command creates a new .env file and overrides our APP_KEY!
-    # We must patch the .env file to restore our persistent VALID_APP_KEY.
-    sed -i "s|^APP_KEY=.*|APP_KEY=\"${VALID_APP_KEY}\"|g" /app/.env
-    sed -i "s|^APP_INSTALLED=.*|APP_INSTALLED=\"true\"|g" /app/.env
+    # The installer command creates a new .env file and destroys all our custom variables!
+    # We must regenerate the .env file to restore APP_URL, LOG_CHANNEL, APP_DEBUG, and our persistent APP_KEY.
+    generate_env
     
     echo "Installation complete. Admin credentials: admin@example.com / password"
 else
