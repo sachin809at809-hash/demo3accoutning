@@ -73,8 +73,10 @@ const dashboard = new Vue({
         const scrollLeft = document.getElementById('dashboard-left');
         const scrollRight = document.getElementById('dashboard-right');
 
-        scrollLeft.addEventListener('click', () => scrollToItem('left'));
-        scrollRight.addEventListener('click', () => scrollToItem('right'));
+        if (scrollLeft && scrollRight) {
+            scrollLeft.addEventListener('click', () => scrollToItem('left'));
+            scrollRight.addEventListener('click', () => scrollToItem('right'));
+        }
 
         const isRtl = document.documentElement.dir === 'rtl';
 
@@ -138,6 +140,8 @@ const dashboard = new Vue({
         }
 
         function updateSlider() {
+            if (!slider || !scrollLeft || !scrollRight) return;
+
             const sliderWidth = slider.clientWidth;
             const windowWidth = window.innerWidth;
 
