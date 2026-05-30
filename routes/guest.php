@@ -27,3 +27,19 @@ Route::group(['prefix' => 'auth'], function () {
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+Route::get('/debug-log', function () {
+    try {
+        $logFile = storage_path('logs/laravel.log');
+        if (!file_exists($logFile)) {
+            return 'No log file found.';
+        }
+        $fp = fopen($logFile, 'r');
+        fseek($fp, -10000, SEEK_END);
+        $content = fread($fp, 10000);
+        fclose($fp);
+        return response($content)->header('Content-Type', 'text/plain');
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
