@@ -10,7 +10,6 @@ COPY . .
 RUN composer install --no-interaction --no-dev --optimize-autoloader
 
 # Change Nginx Document Root to Laravel's public directory
-ENV WEB_DOCUMENT_ROOT=/app/public
 ENV PHP_MAX_EXECUTION_TIME=300
 
 # Fix permissions for storage and bootstrap/cache
