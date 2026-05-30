@@ -15,6 +15,10 @@ use Livewire\Livewire;
     return Route::get($base . '/vendor/livewire/livewire/dist/livewire.min.js', $handle);
 });
 
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/livewire/update', $handle);
+});
+
 Route::get('/debug-log', function () {
     try {
         $logFile = storage_path('logs/laravel.log');
@@ -29,4 +33,8 @@ Route::get('/debug-log', function () {
     } catch (\Exception $e) {
         return $e->getMessage();
     }
+});
+
+Route::get('/debug-perms', function () {
+    return response(shell_exec('ls -la /app/public/js/auth/'))->header('Content-Type', 'text/plain');
 });

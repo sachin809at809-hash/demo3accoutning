@@ -140,12 +140,16 @@ class Handler extends ExceptionHandler
                 ], 404);
             }
 
-            flash(trans('errors.body.page_not_found'))->error()->important();
+            if ($request->hasSession()) {
+                flash(trans('errors.body.page_not_found'))->error()->important();
 
-            // normal 404 view page feedback
-            return redirect()
-                ->back()
-                ->withErrors(['msg', trans('errors.body.page_not_found')]);
+                // normal 404 view page feedback
+                return redirect()
+                    ->back()
+                    ->withErrors(['msg', trans('errors.body.page_not_found')]);
+            }
+
+            return response('Not Found', 404);
         }
 
         if ($exception instanceof ModelNotFoundException) {
