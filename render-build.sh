@@ -102,4 +102,8 @@ fi
 # Final cache clear to apply the restored APP_KEY
 php artisan config:clear || true
 
+# Fix permissions for all files created during the root artisan install
+chown -R application:application /app/storage /app/bootstrap/cache
+chmod -R 777 /app/storage /app/bootstrap/cache
+
 echo "Setup complete. Nginx is starting..."
