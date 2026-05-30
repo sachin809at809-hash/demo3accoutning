@@ -33,6 +33,7 @@ echo "QUEUE_CONNECTION=\"${QUEUE_CONNECTION:-"database"}\"" >> /app/.env
 echo "CACHE_DRIVER=\"${CACHE_DRIVER:-"file"}\"" >> /app/.env
 echo "SESSION_DRIVER=\"${SESSION_DRIVER:-"file"}\"" >> /app/.env
 echo "AI_PROVIDER=\"${AI_PROVIDER:-"gemini"}\"" >> /app/.env
+echo "LOG_CHANNEL=stderr" >> /app/.env
 
 # Fix permissions
 chmod 644 /app/.env
@@ -50,6 +51,12 @@ if [ -z "${DB_HOST:-}" ]; then
     echo "Please configure the database environment variables in your Render Dashboard."
     echo "You need: DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD."
     exit 1
+fi
+
+# Allow forced reset if the database was partially installed and corrupted
+if [ "${RESET_DATABASE:-"false"}" == "true" ]; then
+    echo "RESET_DATABASE=true detected! Wiping the database..."
+    php artisan db:wipe --force || true
 fi
 
 # We check if the users table exists and has rows to determine if the app is already installed.
