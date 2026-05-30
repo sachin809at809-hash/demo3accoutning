@@ -17,7 +17,7 @@ VALID_APP_KEY=$(php -r "
 
 # 2. Rebuild the .env file function
 # Create a symlink so hardcoded '/public/...' asset URLs resolve correctly when the document root is secured
-ln -sf . /app/public/public
+ln -sfn /app/public /app/public/public
 
 # Ensure a basic manifest.json exists so the IdentifyCompany middleware doesn't crash on it
 if [ ! -f /app/public/manifest.json ]; then
