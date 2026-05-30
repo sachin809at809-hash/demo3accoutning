@@ -92,6 +92,7 @@ if [ "$HAS_USERS" == "0" ]; then
         --db-name="${DB_DATABASE}" \
         --db-username="${DB_USERNAME}" \
         --db-password="${DB_PASSWORD}" \
+        --db-prefix="ak_" \
         --company-name="${APP_NAME:-Apex Accounting}" \
         --company-email="admin@example.com" \
         --admin-email="admin@example.com" \
