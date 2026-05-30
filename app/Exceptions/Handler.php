@@ -100,7 +100,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-        die($exception->getMessage() . "\n" . $exception->getTraceAsString());
         if (request_is_api($request)) {
             return $this->handleApiExceptions($request, $exception);
         }
@@ -109,7 +108,7 @@ class Handler extends ExceptionHandler
             return $this->handleWebExceptions($request, $exception);
         }
 
-        die($exception->getMessage() . "\n" . $exception->getTraceAsString());
+        return parent::render($request, $exception);
     }
 
     /**
