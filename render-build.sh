@@ -40,7 +40,7 @@ generate_env() {
     echo "CACHE_DRIVER=\"${CACHE_DRIVER:-"file"}\"" >> /app/.env
     echo "SESSION_DRIVER=\"${SESSION_DRIVER:-"file"}\"" >> /app/.env
     echo "AI_PROVIDER=\"${AI_PROVIDER:-"gemini"}\"" >> /app/.env
-    echo "LOG_CHANNEL=stderr" >> /app/.env
+    echo "LOG_CHANNEL=single" >> /app/.env
     chmod 644 /app/.env
 }
 
