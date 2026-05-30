@@ -20,5 +20,5 @@ Route::get('/debug-log', function () {
     if (!file_exists($logFile)) {
         return 'No log file found.';
     }
-    return response(shell_exec('tail -n 1000 ' . escapeshellarg($logFile)))->header('Content-Type', 'text/plain');
+    return response(file_get_contents($logFile))->header('Content-Type', 'text/plain');
 });
