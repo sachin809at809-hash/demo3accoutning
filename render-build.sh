@@ -18,8 +18,8 @@ VALID_APP_KEY=$(php -r "
 # 2. Rebuild the .env file function
 
 # Ensure a basic manifest.json exists so the IdentifyCompany middleware doesn't crash on it
-if [ ! -f /app/public/manifest.json ]; then
-    echo '{"name":"Apex Accounting","display":"standalone"}' > /app/public/manifest.json
+if [ ! -f /app/manifest.json ]; then
+    echo '{"name":"Apex Accounting","display":"standalone"}' > /app/manifest.json
 fi
 
 generate_env() {
