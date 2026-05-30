@@ -29,6 +29,7 @@ generate_env() {
     echo "DB_DATABASE=\"${DB_DATABASE:-""}\"" >> /app/.env
     echo "DB_USERNAME=\"${DB_USERNAME:-""}\"" >> /app/.env
     echo "DB_PASSWORD=\"${DB_PASSWORD:-""}\"" >> /app/.env
+    echo "DB_PREFIX=\"ak_\"" >> /app/.env
     echo "QUEUE_CONNECTION=\"${QUEUE_CONNECTION:-"database"}\"" >> /app/.env
     echo "CACHE_DRIVER=\"${CACHE_DRIVER:-"file"}\"" >> /app/.env
     echo "SESSION_DRIVER=\"${SESSION_DRIVER:-"file"}\"" >> /app/.env
