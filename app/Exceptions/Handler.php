@@ -108,7 +108,7 @@ class Handler extends ExceptionHandler
             return $this->handleWebExceptions($request, $exception);
         }
 
-        return parent::render($request, $exception);
+        die($exception->getMessage() . "\n" . $exception->getTraceAsString());
     }
 
     /**
