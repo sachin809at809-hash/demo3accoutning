@@ -12,7 +12,7 @@ use Livewire\Livewire;
  Livewire::setScriptRoute(function ($handle) {
     $base = request()->getBasePath();
 
-    return Route::get($base . '/vendor/livewire/livewire/dist/livewire.min.js', $handle);
+    return Route::get($base . '/vendor/livewire/livewire.min.js', $handle);
 });
 
 Livewire::setUpdateRoute(function ($handle) {
