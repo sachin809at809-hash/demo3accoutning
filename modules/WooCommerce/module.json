@@ -1,0 +1,17 @@
+{
+    "alias": "woo-commerce",
+    "icon": "fa fa-cog",
+    "version": "1.0.0",
+    "active": 1,
+    "providers": [
+        "Modules\\WooCommerce\\Providers\\Event",
+        "Modules\\WooCommerce\\Providers\\Main"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": [],
+    "reports": [],
+    "widgets": [],
+    "settings": [],
+    "extra-modules": {}
+}

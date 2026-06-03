@@ -108,6 +108,8 @@ class Handler extends ExceptionHandler
             return $this->handleWebExceptions($request, $exception);
         }
 
+        file_put_contents(storage_path('logs/my_error.log'), $exception->getMessage() . "\n" . $exception->getFile() . "\n" . $exception->getLine());
+        
         return parent::render($request, $exception);
     }
 

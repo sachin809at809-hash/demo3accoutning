@@ -28,12 +28,17 @@ class IdentifyCompany
 
         $company_id = $this->getCompanyId();
 
+        // Fallback to default company for the public storefront and webhooks so visitors can access them
+        if (empty($company_id) && ($request->is('store*') || $request->is('omnichat*'))) {
+            $company_id = 1;
+        }
+
         if (empty($company_id)) {
             abort(500, 'Missing company');
         }
 
         // Check if user can access company
-        if ($this->request->isNotSigned($company_id) && $this->isNotUserCompany($company_id)) {
+        if ($this->request->isNotSigned($company_id) && $this->isNotUserCompany($company_id) && !$this->request->is('store*') && !$this->request->is('omnichat*')) {
             throw new AuthenticationException('Unauthenticated.', $guards);
         }
 

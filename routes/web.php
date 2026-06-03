@@ -38,3 +38,17 @@ Route::get('/debug-log', function () {
 Route::get('/debug-perms', function () {
     return response(shell_exec('ls -la /app/public/js/auth/'))->header('Content-Type', 'text/plain');
 });
+
+// Load Ecommerce Storefront routes globally
+Route::middleware(['web', 'company.identify'])->group(function () {
+    if (file_exists(base_path('modules/Ecommerce/Routes/storefront.php'))) {
+        require base_path('modules/Ecommerce/Routes/storefront.php');
+    }
+});
+
+// Load OmniChat Webhook routes globally
+Route::middleware(['web', 'company.identify'])->group(function () {
+    if (file_exists(base_path('modules/OmniChat/Routes/webhook.php'))) {
+        require base_path('modules/OmniChat/Routes/webhook.php');
+    }
+});

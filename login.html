@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="">
+    <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8; charset=ISO-8859-1"/>
+
+    <title>Login</title>
+
+    <base href="https://apex-accounting-web-kj7u.onrender.com/">
+
+    <!-- Web Application Manifest -->
+<link rel="manifest" href="./manifest.json">
+
+<!-- Chrome for Android theme color -->
+<meta name="theme-color" content="#ffffff">
+
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Apex Accounting">
+<link rel="icon" sizes="512x512" href="./public/img/pwa/icon-512x512.png">
+
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#ffffff">
+<meta name="apple-mobile-web-app-title" content="Apex Accounting">
+<link rel="apple-touch-icon" href="./public/img/pwa/icon-512x512.png">
+
+<link href="./public/img/pwa/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-828x1792.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-1242x2208.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-1536x2048.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-1668x2224.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-1668x2388.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+<link href="./public/img/pwa/splash-2048x2732.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image" />
+
+<!-- Tile for Win8 -->
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="./public/img/pwa/icon-512x512.png">
+
+<script type="text/javascript">
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register("./serviceworker.js");
+// }
+</script>
+
+    <link rel="stylesheet" href="./public/css/custom_loading.css?v=3.1.21" type="text/css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./public/img/favicon.ico" type="image/png">
+
+    <!--Icons-->
+    <link rel="stylesheet" href="./public/css/fonts/material-icons/style.css?v=3.1.21" type="text/css">
+
+     <!-- Font -->
+    <link rel="stylesheet" href="./public/vendor/quicksand/css/quicksand.css?v=3.1.21" type="text/css">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="./public/css//third_party/swiper-bundle.min.css?v=3.1.21" type="text/css">
+    <link rel="stylesheet" href="./public/css/app.css?v=3.1.21" type="text/css">
+
+    
+    
+    <!-- Livewire Styles --><style >[wire\:loading][wire\:loading], [wire\:loading\.delay][wire\:loading\.delay], [wire\:loading\.inline-block][wire\:loading\.inline-block], [wire\:loading\.inline][wire\:loading\.inline], [wire\:loading\.block][wire\:loading\.block], [wire\:loading\.flex][wire\:loading\.flex], [wire\:loading\.table][wire\:loading\.table], [wire\:loading\.grid][wire\:loading\.grid], [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {display: none;}[wire\:loading\.delay\.none][wire\:loading\.delay\.none], [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest], [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter], [wire\:loading\.delay\.short][wire\:loading\.delay\.short], [wire\:loading\.delay\.default][wire\:loading\.delay\.default], [wire\:loading\.delay\.long][wire\:loading\.delay\.long], [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer], [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {display: none;}[wire\:offline][wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}:root {--livewire-progress-bar-color: #2299dd;}[x-cloak] {display: none !important;}[wire\:cloak] {display: none !important;}dialog#livewire-error::backdrop {background-color: rgba(0, 0, 0, .6);}</style>
+
+    <script type="text/javascript"><!--
+        var url = 'https://apex-accounting-web-kj7u.onrender.com';
+        var app_url = 'https://apex-accounting-web-kj7u.onrender.com';
+    //--></script>
+
+    
+    <script type="text/javascript"><!--
+        window.Laravel = {"csrfToken":"Yj6VHdbTJxnpQUMBJo4xtUyfZTIn71IqV2F9bExn"};
+
+        var flash_notification = false;
+    //--></script>
+
+    
+
+    
+    </head>
+
+
+        <body class="bg-body overflow-y-overlay">
+    
+        
+        <!-- Custom Glassmorphism Styles -->
+        <style>
+            .glass-card {
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                border-radius: 16px;
+                box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+            }
+            .dark .glass-card {
+                background: rgba(30, 30, 40, 0.7);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            }
+            .gradient-text {
+                background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .gradient-btn {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                color: #fff !important;
+                border: none;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.3);
+            }
+            .gradient-btn:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 6px 20px 0 rgba(99, 102, 241, 0.4);
+                opacity: 0.95;
+            }
+        </style>
+
+        <div id="app" class="h-screen lg:h-auto bg-no-repeat bg-cover bg-center" style="background-image: url(./public/img/auth/login-bg.png);">
+            <div class="relative w-full lg:max-w-7xl flex items-center m-auto">
+                <div class="hidden lg:block md:w-6/12 h-full flex-col h-fit">
+    <div class="swiper bg-cover bg-bottom bg-no-repeat h-screen py-24">
+        <div class="swiper-container h-full -mt-12">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide flex justify-center flex-col items-center">
+                    <div style="width:450px; height:450px;">
+                        <img src="./public/img/auth/folder.png" alt="Create invoices easily" />
+                    </div>
+
+                    <h1 class="text-3xl text-black-400 font-bold">
+                        Create invoices easily
+                    </h1>
+                </div>
+
+                <div class="swiper-slide flex justify-center flex-col items-center">
+                    <div style="width:450px; height:450px;">
+                        <img src="./public/img/auth/chart.png" alt="Get detailed reports" />
+                    </div>
+
+                    <h1 class="text-3xl text-black-400 font-bold">
+                        Get detailed reports
+                    </h1>
+                </div>
+
+                <div class="swiper-slide flex justify-center flex-col items-center">
+                    <div style="width:450px; height:450px;">
+                        <img src="./public/img/auth/client.png" alt="Track any expense" />
+                    </div>
+
+                    <h1 class="text-3xl text-black-400 font-bold">
+                        Track any expense
+                    </h1>
+                </div>
+
+                <div class="swiper-slide flex justify-center flex-col items-center">
+                    <div style="width:450px; height:450px;">
+                        <img src="./public/img/auth/layout.png" alt="general.dashboard" />
+                    </div>
+
+                    <h1 class="text-3xl text-black-400 font-bold">
+                        Customize your Apex Accounting
+                    </h1>
+                </div>
+            </div>
+
+            <div class="swiper-pagination w-full flex justify-center pb-12 gap-1"></div>
+        </div>
+    </div>
+</div>
+
+                <div class="w-full lg:w-46 lg:my-12 h-auto min-h-[31rem] flex flex-col justify-center gap-12 px-6 lg:px-16 py-16 mt-12 lg:mt-0 glass-card mx-4 lg:mx-0">
+    <div class="flex flex-col gap-4">
+        <div>
+            <img src="./public/img/apex-logo.png" class="w-16" alt="Apex Accounting" />
+
+            <h1 class="text-lg my-3">
+                Login to start your session
+            </h1>
+        </div>
+
+        <div :class="(form.response.success) ? 'w-full bg-green-100 text-green-600 p-3 rounded-sm font-semibold text-xs' : 'hidden'"
+            v-if="form.response.success"
+            v-html="form.response.message"
+            v-cloak
+        ></div>
+
+        <div :class="(form.response.error) ? 'w-full bg-red-100 text-red-600 p-3 rounded-sm font-semibold text-xs' : 'hidden'"
+            v-if="form.response.error"
+            v-html="form.response.message"
+            v-cloak
+        ></div>
+
+        <form
+    method="POST"
+    action="https://apex-accounting-web-kj7u.onrender.com/auth/login"
+        class="mb-0"
+            role="form"
+            novalidate="true"
+            enctype="multipart/form-data"
+            accept-charset="UTF-8"
+        @submit.prevent="onSubmit"
+    @keydown="form.errors ? form.errors.clear($event.target.name): null"
+    id="auth"
+>
+    <input type="hidden" name="_token" value="Yj6VHdbTJxnpQUMBJo4xtUyfZTIn71IqV2F9bExn" autocomplete="off">    <input type="hidden" name="_method" value="POST">    <div class="grid sm:grid-cols-6 gap-x-8 gap-y-6 my-3.5 lg:h-64">
+                <div
+        class="relative sm:col-span-6 required"
+
+        
+                :class="[
+            {'has-error': form.errors.get(&quot;email&quot;)}
+        ]"
+            >
+                    <label class="text-black text-sm font-medium" for="email" required="required">
+    Email
+
+            <span class="text-red ltr:ml-1 rtl:mr-1">*</span>
+    </label>
+        
+        <div class="input-group-alternative"
+        >
+            
+            <input type="email"
+    name="email"
+    id="email"
+    class="w-full text-sm px-3 py-2.5 mt-1 rounded-lg border border-light-gray text-black placeholder-light-gray bg-white disabled:bg-gray-200 focus:outline-none focus:ring-transparent focus:border-purple"
+        placeholder="Email"
+            required="required"
+            v-model="form.email"
+/>
+        </div>
+
+                    <div class="text-red text-sm mt-1 block whitespace-normal"
+    v-if="form.errors.has(&quot;email&quot;)"
+    v-html="form.errors.get(&quot;email&quot;)">
+</div>
+            </div>
+
+                <div
+        class="relative sm:col-span-6 required"
+
+        
+                :class="[
+            {'has-error': form.errors.get(&quot;password&quot;)}
+        ]"
+            >
+                    <label class="text-black text-sm font-medium" for="password" required="required">
+    Password
+
+            <span class="text-red ltr:ml-1 rtl:mr-1">*</span>
+    </label>
+        
+        <div class="input-group-alternative"
+        >
+            
+            <div x-data="{ showPassword: false, password: '' }" class="relative w-full mt-1">
+    <input 
+        type="password"
+        x-bind:class="password ? 'pr-9' : 'pr-0'"
+        x-bind:type="showPassword ? 'text' : 'password'"
+        x-model="password"
+        name="password"
+        id="password"
+        class="w-full text-sm px-3 py-2.5 rounded-lg border border-light-gray text-black placeholder-light-gray bg-white disabled:bg-gray-200 focus:outline-none focus:ring-transparent focus:border-purple"
+                placeholder="Password"
+                        required="required"
+                        v-model="form.password"
+    />
+
+    <button 
+        type="button" 
+        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400"
+        x-on:click="showPassword = !showPassword" x-show="password"
+    >
+        <span x-show="!showPassword" class="material-icons-outlined text-gray-500 text-lg">visibility_off</span>
+        <span x-show="showPassword" class="material-icons-outlined text-gray-500 text-lg">visibility</span>       
+    </button>
+</div>
+        </div>
+
+                    <div class="text-red text-sm mt-1 block whitespace-normal"
+    v-if="form.errors.has(&quot;password&quot;)"
+    v-html="form.errors.get(&quot;password&quot;)">
+</div>
+            </div>
+
+                <div class="sm:col-span-6 flex flex-row justify-between items-center">
+                                        <div>
+                        <input type="checkbox"
+    name="remember"
+    class="rounded-sm text-purple border-gray-300 cursor-pointer disabled:bg-gray-200 focus:outline-none focus:ring-transparent"
+    id="checkbox-remember"
+        value="1"
+                    required="required"
+            v-model="form.remember" class="text-purple focus:outline-none focus:ring-purple focus:border-purple"
+/>
+
+<label class="ltr:ml-2 rtl:mr-2" for="checkbox-remember">
+    Remember Me
+</label>
+                    </div>
+                    
+                                        <a class="text-black-400 hover:text-black-700 text-sm" href="https://apex-accounting-web-kj7u.onrender.com/auth/forgot">
+    I forgot my password
+</a>
+                                    </div>
+
+                <button type="submit" class="relative flex items-center justify-center gradient-btn px-6 py-2.5 text-base rounded-xl disabled:opacity-50 sm:col-span-6 font-semibold shadow-lg hover:shadow-xl transition-all duration-300" :disabled="form.loading">
+    <i
+    class="animate-submit delay-[0.28s] absolute w-2 h-2 rounded-full left-0 right-0 -top-3.5 m-auto before:absolute before:w-2 before:h-2 before:rounded-full before:animate-submit before:delay-[0.14s] after:absolute after:w-2 after:h-2 after:rounded-full after:animate-submit before:-left-3.5 after:-right-3.5 after:delay-[0.42s]"
+    
+    v-if="form.loading"
+>
+</i>
+
+<span :class="[{'opacity-0': form.loading}]">
+    Login
+</span>
+</button>
+            </div>
+</form>
+
+                    <footer class="footer">
+    <div class="lg:absolute bottom-10 ltr:right-6 rtl:left-6 lg:ltr:right-24 lg:rtl:left-24 flex flex-col sm:flex-row items-center justify-end text-sm font-light">
+        Powered by Apex Accounting:&nbsp;<a class="" href="https://akaunting.com" target="_blank">
+    Online Accounting Software
+</a>
+    </div>
+</footer>
+    </div>
+</div>
+            </div>
+        </div>
+
+        
+        <script src="./public/js/auth/common.min.js?v=3.1.21"></script>
+
+<!-- <script type="text/javascript" src="./public/akaunting-js/hotkeys.js" defer></script> -->
+
+
+
+
+
+<script type="text/javascript" src="./vendor/livewire/livewire/dist/livewire.min.js" defer></script>
+
+    </body>
+</html>
