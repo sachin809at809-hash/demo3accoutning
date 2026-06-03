@@ -107,6 +107,13 @@ else
     php artisan migrate --force
 fi
 
+# Install and enable custom modules
+echo "Installing and enabling custom modules..."
+php artisan module:install Ecommerce 1 || true
+php artisan module:enable Ecommerce 1 || true
+php artisan module:install OmniChat 1 || true
+php artisan module:enable OmniChat 1 || true
+
 # Final cache clear to apply the restored APP_KEY
 php artisan config:clear || true
 
