@@ -70,7 +70,7 @@ if [ "${RESET_DATABASE:-"false"}" == "true" ]; then
 fi
 
 # We check if the users table exists and has rows to determine if the app is already installed.
-HAS_USERS=$(php -r "
+HAS_USERS=$(php -d error_reporting="E_ALL & ~E_DEPRECATED & ~E_USER_DEPRECATED" -r "
     require 'vendor/autoload.php';
     \$app = require_once 'bootstrap/app.php';
     \$kernel = \$app->make(Illuminate\Contracts\Console\Kernel::class);
