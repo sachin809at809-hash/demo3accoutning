@@ -45,4 +45,8 @@ Route::admin('ecommerce', function () {
     Route::get('/settings', [\Modules\Ecommerce\Http\Controllers\SettingController::class, 'index'])->name('settings.index');
     Route::post('/settings', [\Modules\Ecommerce\Http\Controllers\SettingController::class, 'update'])->name('settings.update');
     Route::post('/settings/sync/woocommerce', [\Modules\Ecommerce\Http\Controllers\SettingController::class, 'syncWooCommerce'])->name('settings.sync.woocommerce');
+
+    // New ERP Features
+    Route::get('/inventory', [\Modules\Ecommerce\Http\Controllers\InventoryController::class, 'index'])->name('inventory.index');
+    Route::get('/sms', [\Modules\Ecommerce\Http\Controllers\SmsController::class, 'index'])->name('sms.index');
 });

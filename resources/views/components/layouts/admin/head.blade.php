@@ -32,6 +32,9 @@
     <link rel="stylesheet" href="{{ asset('public/css//third_party/vue-html-editor.css?v=' . version('short')) }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/css/element.css?v=' . version('short')) }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('public/css/app.css?v=' . version('short')) }}" type="text/css">
+    
+    <!-- Custom Blanxer ERP Theme -->
+    <link rel="stylesheet" href="{{ asset('public/css/blanxer.css?v=' . version('short')) }}" type="text/css">
 
     @stack('css')
 

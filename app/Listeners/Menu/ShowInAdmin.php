@@ -19,6 +19,7 @@ class ShowInAdmin
      */
     public function handle(Event $event)
     {
+        return; // Disable core Akaunting menu items for Blanxer ERP theme
         $menu = $event->menu;
 
         $attr = ['icon' => ''];

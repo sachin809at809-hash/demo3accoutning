@@ -1,0 +1,122 @@
+/* Blanxer ERP Theme Overrides */
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif !important;
+    background-color: #f4f6f9 !important;
+}
+
+/* Sidebar overrides */
+.sidenav {
+    background-color: #ffffff !important;
+    border-right: 1px solid #edf2f9 !important;
+}
+
+.sidenav .navbar-brand img {
+    max-height: 40px !important;
+}
+
+/* Menu Links */
+.navbar-vertical .navbar-nav .nav-link {
+    color: #5e6e82 !important;
+    font-weight: 500 !important;
+    padding: 0.75rem 1.5rem !important;
+    border-radius: 8px !important;
+    margin: 0.25rem 1rem !important;
+    transition: all 0.2s ease-in-out;
+}
+
+.navbar-vertical .navbar-nav .nav-link:hover {
+    background-color: #f8f9fa !important;
+    color: #2c3e50 !important;
+}
+
+/* Active State - Purple Accent */
+.navbar-vertical .navbar-nav .nav-link.active,
+.navbar-vertical .navbar-nav .nav-link[aria-expanded="true"] {
+    background-color: #f3e8ff !important;
+    color: #7c3aed !important;
+}
+
+.navbar-vertical .navbar-nav .nav-link.active i,
+.navbar-vertical .navbar-nav .nav-link[aria-expanded="true"] i {
+    color: #7c3aed !important;
+}
+
+/* Icons */
+.navbar-vertical .navbar-nav .nav-link i {
+    color: #9da9bb !important;
+    font-size: 1.1rem !important;
+    margin-right: 0.75rem !important;
+}
+
+/* Card overrides */
+.card {
+    border: none !important;
+    box-shadow: 0 0.25rem 0.75rem rgba(18, 38, 63, 0.03) !important;
+    border-radius: 12px !important;
+}
+
+.card-header {
+    background-color: transparent !important;
+    border-bottom: 1px solid #edf2f9 !important;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #7c3aed !important;
+    border-color: #7c3aed !important;
+    border-radius: 8px !important;
+}
+
+.btn-primary:hover {
+    background-color: #6d28d9 !important;
+    border-color: #6d28d9 !important;
+}
+
+/* POS Mode Button Outline */
+.btn-outline-purple {
+    color: #7c3aed !important;
+    border: 1px solid #7c3aed !important;
+    background-color: transparent !important;
+    border-radius: 8px !important;
+}
+
+.btn-outline-purple:hover {
+    background-color: #f3e8ff !important;
+}
+
+/* Tables */
+.table thead th {
+    background-color: #f8f9fa !important;
+    color: #5e6e82 !important;
+    font-weight: 600 !important;
+    border-bottom: 1px solid #edf2f9 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    font-size: 0.75rem !important;
+}
+
+.table tbody td {
+    vertical-align: middle !important;
+    color: #2c3e50 !important;
+    border-bottom: 1px solid #edf2f9 !important;
+}
+
+/* Badges */
+.badge-soft-success {
+    background-color: #d1fae5 !important;
+    color: #065f46 !important;
+}
+
+.badge-soft-warning {
+    background-color: #fef3c7 !important;
+    color: #92400e !important;
+}
+
+.badge-soft-danger {
+    background-color: #fee2e2 !important;
+    color: #991b1b !important;
+}

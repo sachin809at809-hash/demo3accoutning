@@ -100,6 +100,14 @@
                 </button>
             </x-tooltip>
 
+            <!-- POS Mode Button -->
+            <x-tooltip id="tooltip-pos" placement="{{ language()->direction() === 'rtl' ? 'left' : 'right' }}" message="POS Mode">
+                <a href="#" class="flex items-center justify-center w-auto px-3 h-8 mb-2.5 cursor-pointer btn-outline-purple text-sm font-semibold transition-colors" style="text-decoration: none;">
+                    <span class="material-icons-outlined text-purple text-lg mr-1">point_of_sale</span>
+                    POS MODE
+                </a>
+            </x-tooltip>
+
             <x-tooltip id="tooltip-settings" placement="{{ language()->direction() === 'rtl' ? 'left' : 'right' }}" message="{{ trans_choice('general.settings', 2) }}">
                 <button type="button" class="settings-item menu-button flex items-center justify-center w-8 h-8 mb-2.5 cursor-pointer js-menu-toggles" data-menu="settings-menu">
                     <span id="menu-settings-icon" name="settings" class="material-icons-outlined text-purple text-2xl pointer-events-none">settings</span>
