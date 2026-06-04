@@ -40,7 +40,7 @@
     x-ref="realMenu"
     class="w-70 h-screen flex hidden fixed top-0 js-menu z-20 xl:z-10 transition-all ltr:-left-80 rtl:-right-80 xl:ltr:left-0 xl:rtl:right-0"
 >
-    <div class="w-14 py-7 px-1 bg-lilac-900 z-10 menu-scroll overflow-y-auto overflow-x-hidden">
+    <div class="w-14 py-7 px-1 bg-obsidian-glass z-10 menu-scroll overflow-y-auto overflow-x-hidden shadow-2xl border-r border-[#464554]">
         <div
             data-tooltip-target="tooltip-profile"
             data-tooltip-placement="{{ language()->direction() === 'rtl' ? 'left' : 'right' }}"
@@ -102,7 +102,7 @@
 
             <!-- POS Mode Button -->
             <x-tooltip id="tooltip-pos" placement="{{ language()->direction() === 'rtl' ? 'left' : 'right' }}" message="POS Mode">
-                <a href="#" class="flex items-center justify-center w-auto px-3 h-8 mb-2.5 cursor-pointer btn-outline-purple text-sm font-semibold transition-colors" style="text-decoration: none;">
+                <a href="{{ route('ecommerce.pos.index') }}" class="flex items-center justify-center w-auto px-3 h-8 mb-2.5 cursor-pointer btn-outline-purple text-sm font-semibold transition-colors" style="text-decoration: none;">
                     <span class="material-icons-outlined text-purple text-lg mr-1">point_of_sale</span>
                     POS MODE
                 </a>
@@ -126,7 +126,7 @@
 
     @stack('main_menu_start')
 
-    <nav class="menu-list js-main-menu" id="sidenav-main">
+    <nav class="menu-list js-main-menu bg-obsidian-glass shadow-2xl border-r border-[#464554]" id="sidenav-main">
         @stack('main_menu_company_start')
 
         <div class="relative mb-5 cursor-pointer">

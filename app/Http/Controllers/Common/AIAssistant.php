@@ -136,13 +136,56 @@ class AIAssistant extends Controller
                 }
             }
 
+            // Query Top 5 Expenses for this month
+            $topExpenses = Transaction::where('company_id', $companyId)
+                ->where('type', 'expense')
+                ->whereMonth('paid_at', now()->month)
+                ->with('category')
+                ->selectRaw('category_id, sum(amount) as total')
+                ->groupBy('category_id')
+                ->orderByDesc('total')
+                ->take(5)
+                ->get();
+            
+            $expenseStr = "";
+            foreach ($topExpenses as $expense) {
+                $catName = $expense->category ? $expense->category->name : 'Uncategorized';
+                $expenseStr .= "  * {$catName}: " . money($expense->total)->format() . "\n";
+            }
+
+            // Query Overdue Invoices
+            $overdueInvoices = Document::invoice()
+                ->where('company_id', $companyId)
+                ->where('status', 'overdue')
+                ->sum('amount');
+
+            // Query 5 Most Recent Transactions
+            $recentTransactions = Transaction::where('company_id', $companyId)
+                ->with(['contact', 'category'])
+                ->orderBy('paid_at', 'desc')
+                ->take(5)
+                ->get();
+            
+            $recentStr = "";
+            foreach ($recentTransactions as $tx) {
+                $contact = $tx->contact ? $tx->contact->name : 'Unknown';
+                $cat = $tx->category ? $tx->category->name : 'Uncategorized';
+                $recentStr .= "  * {$tx->paid_at->format('Y-m-d')} | {$tx->type} | " . money($tx->amount)->format() . " | Contact: {$contact} | Cat: {$cat}\n";
+            }
+
             // Build Context Prompt
             $contextPrompt = "Here is the current financial state of the company:
-- Total Invoiced (Sales): " . money($totalInvoices)->format() . " (Paid Invoices: " . money($paidInvoices)->format() . ")
+- Total Invoiced (Sales): " . money($totalInvoices)->format() . " (Paid Invoices: " . money($paidInvoices)->format() . ", Overdue: " . money($overdueInvoices)->format() . ")
 - Total Billed (Purchases): " . money($totalBills)->format() . " (Paid Bills: " . money($paidBills)->format() . ")
 - Direct Income Transactions: " . money($incomeTotal)->format() . "
 - Direct Expense Transactions: " . money($expenseTotal)->format() . "
 - Net Cash Profit Flow: " . money($incomeTotal - $expenseTotal)->format() . "
+
+Top 5 Expense Categories (This Month):
+" . ($expenseStr ?: "  * No expenses recorded this month\n") . "
+
+5 Most Recent Transactions:
+" . ($recentStr ?: "  * No recent transactions\n") . "
 
 User Question: \"{$question}\"
 

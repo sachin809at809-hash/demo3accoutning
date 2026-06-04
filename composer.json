@@ -70,6 +70,7 @@
         "sentry/sentry-laravel": "^4.0",
         "simple-icons/simple-icons": "^9.0",
         "simshaun/recurr": "^5.0",
+        "smalot/pdfparser": "*",
         "staudenmeir/belongs-to-through": "^2.12",
         "staudenmeir/eloquent-has-many-deep": "^1.15",
         "symfony/http-client": "^6.0",

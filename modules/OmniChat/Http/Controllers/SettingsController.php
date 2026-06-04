@@ -36,6 +36,7 @@ class SettingsController extends Controller
                     'additional_field' => $request->additional_field, // for extra fields if needed
                 ],
                 'is_active' => $request->has('is_active') ? true : false,
+                'is_ai_enabled' => $request->has('is_ai_enabled') ? true : false,
             ]
         );
 

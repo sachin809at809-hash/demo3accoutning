@@ -124,6 +124,10 @@
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="fb_active" value="1" {{ ($fb && $fb->is_active) || !$fb ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="fb_active">Enable this channel</label>
                                 </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="fb_ai" value="1" {{ ($fb && $fb->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="fb_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
+                                </div>
                                 <button type="submit" class="btn btn-primary btn-save">Save Settings</button>
                             </div>
                         </form>
@@ -160,6 +164,10 @@
                                 <div class="custom-control custom-switch mb-3">
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="ig_active" value="1" {{ ($ig && $ig->is_active) || !$ig ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="ig_active">Enable this channel</label>
+                                </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="ig_ai" value="1" {{ ($ig && $ig->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="ig_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
                                 </div>
                                 <button type="submit" class="btn btn-danger btn-save" style="background: linear-gradient(45deg, #e6683c, #dc2743); border: none;">Save Settings</button>
                             </div>
@@ -198,6 +206,10 @@
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="tt_active" value="1" {{ ($tt && $tt->is_active) || !$tt ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="tt_active">Enable this channel</label>
                                 </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="tt_ai" value="1" {{ ($tt && $tt->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="tt_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
+                                </div>
                                 <button type="submit" class="btn btn-dark btn-save">Save Settings</button>
                             </div>
                         </form>
@@ -234,6 +246,10 @@
                                 <div class="custom-control custom-switch mb-3">
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="li_active" value="1" {{ ($li && $li->is_active) || !$li ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="li_active">Enable this channel</label>
+                                </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="li_ai" value="1" {{ ($li && $li->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="li_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-save" style="background-color: #0A66C2; border: none;">Save Settings</button>
                             </div>
@@ -272,6 +288,10 @@
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="mail_active" value="1" {{ ($mail && $mail->is_active) || !$mail ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="mail_active">Enable this channel</label>
                                 </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="mail_ai" value="1" {{ ($mail && $mail->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="mail_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
+                                </div>
                                 <button type="submit" class="btn btn-warning btn-save text-white">Save Settings</button>
                             </div>
                         </form>
@@ -308,6 +328,10 @@
                                 <div class="custom-control custom-switch mb-3">
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="wa_api_active" value="1" {{ ($wa_api && $wa_api->is_active) || !$wa_api ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="wa_api_active">Enable this channel</label>
+                                </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="wa_api_ai" value="1" {{ ($wa_api && $wa_api->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="wa_api_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-save" style="background-color: #25D366; border: none;">Save Settings</button>
                             </div>
@@ -349,6 +373,10 @@
                                 <div class="custom-control custom-switch mb-3">
                                     <input type="checkbox" name="is_active" class="custom-control-input" id="wa_qr_active" value="1" {{ ($wa_qr && $wa_qr->is_active) || !$wa_qr ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="wa_qr_active">Enable this channel</label>
+                                </div>
+                                <div class="custom-control custom-switch mb-3">
+                                    <input type="checkbox" name="is_ai_enabled" class="custom-control-input" id="wa_qr_ai" value="1" {{ ($wa_qr && $wa_qr->is_ai_enabled) ? 'checked' : '' }}>
+                                    <label class="custom-control-label text-purple font-weight-bold" for="wa_qr_ai"><i class="fas fa-robot mr-1"></i> AI Auto-Responder</label>
                                 </div>
                                 <div class="d-flex gap-2">
                                     <button type="button" class="btn btn-outline-secondary font-weight-bold w-50" style="border-radius: 8px;">Generate</button>

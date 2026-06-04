@@ -1,5 +1,5 @@
-<div class="flex flex-col lg:flex-row my-10 lg:space-x-24 rtl:space-x-reverse space-y-12 lg:space-y-0">
-    <div class="w-full lg:w-5/12 space-y-12">
+<div class="flex flex-col lg:flex-row my-10 lg:space-x-12 rtl:space-x-reverse space-y-12 lg:space-y-0">
+    <div class="w-full lg:w-4/12 space-y-8 p-6 bg-obsidian-glass shadow-2xl rounded-3xl border border-[#464554]">
         @stack('recurring_message_start')
 
         @if (! $hideRecurringMessage)
@@ -111,7 +111,7 @@
         @stack('attachment_end')
     </div>
 
-    <div class="w-full lg:w-7/12">
+    <div class="w-full lg:w-8/12 p-10 bg-obsidian-glass shadow-2xl rounded-3xl border border-[#464554]">
         @stack('document_start')
 
         <x-documents.show.template type="{{ $type }}" :document="$document" />

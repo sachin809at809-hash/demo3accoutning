@@ -3,29 +3,24 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class WeeklyFinancialInsights extends Mailable
+class WeeklyFinancialInsights extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    public $company;
-    public $insights;
-    public $metrics;
+    public $data;
 
     /**
      * Create a new message instance.
      *
-     * @param  mixed  $company
-     * @param  string  $insights
-     * @param  array  $metrics
+     * @param array $data
      */
-    public function __construct($company, string $insights, array $metrics)
+    public function __construct(array $data)
     {
-        $this->company = $company;
-        $this->insights = $insights;
-        $this->metrics = $metrics;
+        $this->data = $data;
     }
 
     /**
@@ -35,9 +30,7 @@ class WeeklyFinancialInsights extends Mailable
      */
     public function build()
     {
-        $subject = "[" . config('app.name', 'Apex Accounting') . "] Weekly Financial Insights Report - {$this->company->name}";
-
-        return $this->subject($subject)
-                    ->view('emails.weekly_financial_insights');
+        return $this->subject('Your Weekly Financial Insights - ' . $this->data['company_name'])
+                    ->view('emails.weekly_insights');
     }
 }

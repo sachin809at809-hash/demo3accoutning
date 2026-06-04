@@ -44,6 +44,16 @@ class ProductController extends Controller
             'is_active' => $request->has('is_active') ? true : false,
         ]);
 
+        // Create the default inventory variant
+        \Modules\Ecommerce\Models\EcommerceProductVariant::create([
+            'company_id' => company_id(),
+            'product_id' => $product->id,
+            'name' => 'Default',
+            'sku' => strtoupper(Str::random(8)),
+            'price' => $request->price,
+            'stock_quantity' => $request->stock_quantity,
+        ]);
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('ecommerce/products', 'public');
             \Modules\Ecommerce\Models\EcommerceProductImage::create([

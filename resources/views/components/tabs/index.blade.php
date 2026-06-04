@@ -17,7 +17,7 @@
     @endif
 >
     <div data-tabs-swiper>
-        <ul data-tabs-swiper-wrapper {{ ((! $attributes->has('override')) || ($attributes->has('override') && ! in_array('class', explode(',', $attributes->get('override'))))) ? $attributes->merge(['class' => 'inline-flex overflow-x-scroll large-overflow-unset']) : $attributes }}>
+        <ul data-tabs-swiper-wrapper {{ ((! $attributes->has('override')) || ($attributes->has('override') && ! in_array('class', explode(',', $attributes->get('override'))))) ? $attributes->merge(['class' => 'inline-flex overflow-x-scroll large-overflow-unset p-1 bg-[#131b2e]/70 backdrop-blur-md rounded-xl shadow-sm border border-[#464554]']) : $attributes }}>
             {!! $navs !!}
         </ul>
     </div>

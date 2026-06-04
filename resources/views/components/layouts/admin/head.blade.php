@@ -21,6 +21,20 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('public/img/favicon.ico') }}" type="image/png">
 
+    <!-- Obsidian Prism Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Outfit', sans-serif; }
+        .mono-data { font-family: 'JetBrains Mono', monospace; }
+        .text-obsidian-surface { color: #dae2fd; }
+        .bg-obsidian-glass { background-color: rgba(19, 27, 46, 0.7); backdrop-filter: blur(12px); border-color: #464554; }
+        .gradient-primary { background: linear-gradient(to right, #6366f1, #a855f7); color: white; }
+    </style>
+
     <!--Icons-->
     <link rel="stylesheet" href="{{ asset('public/css/fonts/material-icons/style.css?v=' . version('short')) }}" type="text/css">
 

@@ -1,4 +1,4 @@
-<div {{ ((! $attributes->has('override')) || ($attributes->has('override') && ! in_array('class', explode(',', $attributes->get('override'))))) ? $attributes->merge(['class' => 'mb-14']) : $attributes }}>
+<div {{ ((! $attributes->has('override')) || ($attributes->has('override') && ! in_array('class', explode(',', $attributes->get('override'))))) ? $attributes->merge(['class' => 'mb-14 p-8 bg-obsidian-glass shadow-2xl rounded-3xl transition-all duration-300 hover:shadow-purple-500/10']) : $attributes }}>
     @if (!empty($head) && $head->isNotEmpty())
         {!! $head !!}
     @endif

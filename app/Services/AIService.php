@@ -101,18 +101,18 @@ class AIService
     /**
      * Route chat/insight request to correct provider.
      */
-    protected function chatWithProvider(string $provider, string $prompt): string
+    protected function chatWithProvider(string $provider, string $prompt, bool $isOmnichat = false): string
     {
         if ($provider === 'gemini') {
             if (empty($this->geminiKey)) {
                 throw new \Exception("Gemini API key is not configured.");
             }
-            return $this->chatWithGemini($prompt);
+            return $this->chatWithGemini($prompt, $isOmnichat);
         } elseif ($provider === 'groq') {
             if (empty($this->groqKey)) {
                 throw new \Exception("Groq API key is not configured.");
             }
-            return $this->chatWithGroq($prompt);
+            return $this->chatWithGroq($prompt, $isOmnichat);
         }
         
         throw new \Exception("Unsupported provider: {$provider}");
@@ -128,31 +128,57 @@ class AIService
         }
 
         $mimeType = mime_content_type($absoluteFilePath);
-        $fileData = base64_encode(file_get_contents($absoluteFilePath));
         $systemInstruction = $this->getSystemInstruction();
 
         $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent?key={$this->geminiKey}";
 
-        $payload = [
-            'contents' => [
-                [
-                    'parts' => [
-                        [
-                            'text' => $systemInstruction
-                        ],
-                        [
-                            'inlineData' => [
-                                'mimeType' => $mimeType,
-                                'data' => $fileData
+        if ($mimeType === 'application/pdf') {
+            $parser = new \Smalot\PdfParser\Parser();
+            $pdf = $parser->parseFile($absoluteFilePath);
+            $text = $pdf->getText();
+
+            $payload = [
+                'contents' => [
+                    [
+                        'parts' => [
+                            [
+                                'text' => "Here is the extracted text from a PDF document:\n\n" . substr($text, 0, 25000)
                             ]
                         ]
                     ]
+                ],
+                'systemInstruction' => [
+                    'parts' => [
+                        ['text' => $systemInstruction]
+                    ]
+                ],
+                'generationConfig' => [
+                    'responseMimeType' => 'application/json'
                 ]
-            ],
-            'generationConfig' => [
-                'responseMimeType' => 'application/json'
-            ]
-        ];
+            ];
+        } else {
+            $fileData = base64_encode(file_get_contents($absoluteFilePath));
+            $payload = [
+                'contents' => [
+                    [
+                        'parts' => [
+                            [
+                                'text' => $systemInstruction
+                            ],
+                            [
+                                'inlineData' => [
+                                    'mimeType' => $mimeType,
+                                    'data' => $fileData
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                'generationConfig' => [
+                    'responseMimeType' => 'application/json'
+                ]
+            ];
+        }
 
         Log::info("Dispatching document to Gemini API (Model: {$this->geminiModel})");
 
@@ -180,7 +206,6 @@ class AIService
         }
 
         $mimeType = mime_content_type($absoluteFilePath);
-        $fileData = base64_encode(file_get_contents($absoluteFilePath));
         $systemInstruction = $this->getSystemInstruction();
 
         $endpoint = "https://api.groq.com/openai/v1/chat/completions";
@@ -192,7 +217,16 @@ class AIService
             ]
         ];
 
-        if (str_starts_with($mimeType, 'image/')) {
+        if ($mimeType === 'application/pdf') {
+            $parser = new \Smalot\PdfParser\Parser();
+            $pdf = $parser->parseFile($absoluteFilePath);
+            $text = $pdf->getText();
+            $messages[] = [
+                'role' => 'user',
+                'content' => "Here is the extracted text from a PDF document. Parse it:\n\n" . substr($text, 0, 15000)
+            ];
+        } elseif (str_starts_with($mimeType, 'image/')) {
+            $fileData = base64_encode(file_get_contents($absoluteFilePath));
             $messages[] = [
                 'role' => 'user',
                 'content' => [
@@ -209,7 +243,8 @@ class AIService
                 ]
             ];
         } else {
-            // Groq vision models do not support raw PDFs directly. We pass as a text payload.
+            // Fallback for unknown
+            $fileData = base64_encode(file_get_contents($absoluteFilePath));
             $messages[] = [
                 'role' => 'user',
                 'content' => "Here is a document's raw content (represented as base64). Parse it: [base64 data size: " . strlen($fileData) . " bytes].\nIf you cannot process base64 PDFs, output an empty JSON structure or extract values based on filename."
@@ -247,9 +282,9 @@ class AIService
     /**
      * Run chat using Gemini API.
      */
-    protected function chatWithGemini(string $prompt): string
+    protected function chatWithGemini(string $prompt, bool $isOmnichat = false): string
     {
-        $systemInstruction = $this->getChatSystemInstruction();
+        $systemInstruction = $isOmnichat ? $this->getOmnichatSystemInstruction() : $this->getChatSystemInstruction();
         $endpoint = "https://generativelanguage.googleapis.com/v1beta/models/{$this->geminiModel}:generateContent?key={$this->geminiKey}";
 
         $payload = [
@@ -283,9 +318,9 @@ class AIService
     /**
      * Run chat using Groq Llama 3.3 model.
      */
-    protected function chatWithGroq(string $prompt): string
+    protected function chatWithGroq(string $prompt, bool $isOmnichat = false): string
     {
-        $systemInstruction = $this->getChatSystemInstruction();
+        $systemInstruction = $isOmnichat ? $this->getOmnichatSystemInstruction() : $this->getChatSystemInstruction();
         $endpoint = "https://api.groq.com/openai/v1/chat/completions";
 
         $payload = [
@@ -357,5 +392,43 @@ The JSON object must follow this exact schema:
         return "You are an elite financial analyst and certified public accountant (CPA).
 Provide professional, educational, and highly strategic financial insights in plain English based on the provided metrics.
 Use bullet points, clear formatting, and highlight cash flow suggestions, expense reduction tips, and tax preparation advice. Keep your tone encouraging and professional.";
+    }
+
+    /**
+     * OmniChat Auto-Responder Instruction.
+     */
+    protected function getOmnichatSystemInstruction(): string
+    {
+        return "You are an AI customer service agent for an ecommerce business running on the Apex ERP system. 
+Your goal is to answer customer questions politely, concisely, and accurately based on the context provided in the prompt.
+If the customer asks about an order and the order details are provided, summarize the status clearly.
+If you do not know the answer, politely inform the customer that a human agent will follow up shortly.
+Do NOT hallucinate information. Keep answers under 3-4 sentences.";
+    }
+
+    /**
+     * Generate an automated response for OmniChat customer inquiries.
+     *
+     * @param string $prompt
+     * @return string
+     * @throws \Exception
+     */
+    public function generateOmnichatResponse(string $prompt): string
+    {
+        $primary = $this->defaultProvider;
+        $backup = $primary === 'gemini' ? 'groq' : 'gemini';
+
+        try {
+            Log::info("AI: Trying primary provider '{$primary}' to generate OmniChat response.");
+            return $this->chatWithProvider($primary, $prompt, true);
+        } catch (\Exception $e) {
+            Log::warning("AI primary chat provider ({$primary}) failed: " . $e->getMessage() . ". Attempting fallback to backup provider ({$backup}).");
+            try {
+                return $this->chatWithProvider($backup, $prompt, true);
+            } catch (\Exception $fallbackEx) {
+                Log::error("AI fallback chat provider ({$backup}) also failed: " . $fallbackEx->getMessage());
+                return "I'm sorry, but our AI assistant is currently unavailable. An agent will be with you shortly.";
+            }
+        }
     }
 }

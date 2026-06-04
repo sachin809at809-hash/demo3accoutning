@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('recurring:check')->dailyAt($schedule_time)->runInBackground();
         $schedule->command('storage-temp:clear')->dailyAt('17:00');
         $schedule->command('model:prune')->dailyAt('17:00');
-        $schedule->command('ai:weekly-report')->weeklyOn(1, '08:00');
+        $schedule->job(new \App\Jobs\GenerateWeeklyFinancialReport())->weeklyOn(5, '17:00');
     }
 
     /**

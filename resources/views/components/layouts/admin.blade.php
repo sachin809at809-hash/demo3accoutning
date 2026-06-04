@@ -13,9 +13,9 @@
     </x-layouts.admin.head>
 
     @mobile
-    <body class="bg-body">
+    <body class="bg-[#0b1326] text-[#dae2fd] min-h-screen">
     @elsemobile
-    <body class="bg-body overflow-y-overlay">
+    <body class="bg-[#0b1326] text-[#dae2fd] min-h-screen overflow-y-overlay">
     @endmobile
 
         @stack('body_start')

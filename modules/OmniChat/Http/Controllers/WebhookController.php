@@ -77,7 +77,7 @@ class WebhookController extends Controller
         }
 
         // 4. Save the incoming message
-        OmnichatMessage::create([
+        $newMessage = OmnichatMessage::create([
             'company_id' => $channel->company_id,
             'conversation_id' => $conversation->id,
             'sender_type' => 'customer',
@@ -86,6 +86,34 @@ class WebhookController extends Controller
             'is_read' => false,
             'platform_message_id' => $messageData['message_id'] ?? null,
         ]);
+
+        // 5. Trigger AI Auto-Responder if enabled
+        if ($channel->is_ai_enabled && $conversation->status !== 'closed' && !$conversation->assigned_to) {
+            try {
+                // Build context
+                $context = "Customer Name: {$conversation->customer_name}\n";
+                $context .= "Recent Order Context: (Not explicitly provided in this simple webhook but assume context exists in production)\n";
+                $context .= "Customer Message: {$newMessage->content}";
+                
+                $aiService = new \App\Services\AIService();
+                $aiResponse = $aiService->generateOmnichatResponse($context);
+                
+                if ($aiResponse) {
+                    $aiMessage = OmnichatMessage::create([
+                        'company_id' => $channel->company_id,
+                        'conversation_id' => $conversation->id,
+                        'sender_type' => 'agent',
+                        'content' => $aiResponse,
+                        'is_read' => true,
+                    ]);
+                    
+                    // Dispatch the actual platform send job
+                    \Modules\OmniChat\Jobs\SendMessageJob::dispatch($aiMessage->id);
+                }
+            } catch (\Exception $e) {
+                \Log::error("AI Responder failed for Conversation {$conversation->id}: " . $e->getMessage());
+            }
+        }
 
         return response('EVENT_RECEIVED', 200);
     }

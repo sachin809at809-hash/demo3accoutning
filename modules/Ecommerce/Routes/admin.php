@@ -49,4 +49,24 @@ Route::admin('ecommerce', function () {
     // New ERP Features
     Route::get('/inventory', [\Modules\Ecommerce\Http\Controllers\InventoryController::class, 'index'])->name('inventory.index');
     Route::get('/sms', [\Modules\Ecommerce\Http\Controllers\SmsController::class, 'index'])->name('sms.index');
+    Route::post('/sms/connect', [\Modules\Ecommerce\Http\Controllers\SmsController::class, 'connect'])->name('sms.connect');
+    Route::get('/outlets', [\Modules\Ecommerce\Http\Controllers\OutletController::class, 'index'])->name('outlets.index');
+    Route::get('/transactions', [\Modules\Ecommerce\Http\Controllers\TransactionController::class, 'index'])->name('transactions.index');
+    
+    // Point of Sale
+    Route::get('/pos', [\Modules\Ecommerce\Http\Controllers\PosController::class, 'index'])->name('pos.index');
+    
+    // CRM
+    Route::get('/customers', [\Modules\Ecommerce\Http\Controllers\CustomerController::class, 'index'])->name('crm.index');
+    // Store Users
+    Route::get('/store_users', [\Modules\Ecommerce\Http\Controllers\StoreUserController::class, 'index'])->name('store_users.index');
+    
+    // Brands
+    Route::get('/brands', [\Modules\Ecommerce\Http\Controllers\BrandController::class, 'index'])->name('brands.index');
+    
+    // Reviews
+    Route::get('/reviews', [\Modules\Ecommerce\Http\Controllers\ReviewController::class, 'index'])->name('reviews.index');
+    
+    // Issues
+    Route::get('/issues', [\Modules\Ecommerce\Http\Controllers\IssueController::class, 'index'])->name('issues.index');
 });

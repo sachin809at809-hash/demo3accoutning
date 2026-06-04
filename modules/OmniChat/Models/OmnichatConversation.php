@@ -21,11 +21,17 @@ class OmnichatConversation extends Model
         'avatar',
         'status',
         'last_message_at',
+        'assigned_to',
     ];
 
     protected $casts = [
         'last_message_at' => 'datetime',
     ];
+
+    public function assignee()
+    {
+        return $this->belongsTo(\App\Models\Auth\User::class, 'assigned_to');
+    }
 
     public function channel()
     {

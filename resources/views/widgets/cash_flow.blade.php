@@ -1,4 +1,4 @@
-<div id="widget-{{ $class->model->id }}" class="w-full my-8 px-6">
+<div id="widget-{{ $class->model->id }}" class="{{ $class->model->settings->width }} my-8 p-6 bg-white/70 backdrop-blur-xl shadow-2xl rounded-3xl border border-white/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-purple-500/20">
     @include($class->views['header'], ['header_class' => ''])
 
     <div class="flex flex-col-reverse lg:flex-row mt-3">

@@ -27,7 +27,9 @@ class InboxController extends Controller
             ->pluck('platform')
             ->unique();
             
-        return view('omni-chat::inbox', compact('conversations', 'activePlatforms', 'platform'));
+        $cannedResponses = \Modules\OmniChat\Models\OmnichatCannedResponse::where('company_id', company_id())->get();
+            
+        return view('omni-chat::inbox', compact('conversations', 'activePlatforms', 'platform', 'cannedResponses'));
     }
 
     public function show(Request $request, OmnichatConversation $conversation)
@@ -49,9 +51,15 @@ class InboxController extends Controller
             ->pluck('platform')
             ->unique();
             
-        $conversation->load('messages', 'channel');
+        $cannedResponses = \Modules\OmniChat\Models\OmnichatCannedResponse::where('company_id', company_id())->get();
         
-        return view('omni-chat::inbox', compact('conversations', 'conversation', 'activePlatforms', 'platform'));
+        $users = \App\Models\Auth\User::whereHas('companies', function($q) {
+            $q->where('company_id', company_id());
+        })->get();
+            
+        $conversation->load('messages', 'channel', 'assignee');
+        
+        return view('omni-chat::inbox', compact('conversations', 'conversation', 'activePlatforms', 'platform', 'cannedResponses', 'users'));
     }
 
     public function reply(Request $request, OmnichatConversation $conversation)
@@ -70,6 +78,17 @@ class InboxController extends Controller
         
         \Modules\OmniChat\Jobs\SendMessageJob::dispatch($message->id);
 
+        return redirect()->back();
+    }
+
+    public function assign(Request $request, OmnichatConversation $conversation)
+    {
+        $request->validate(['assigned_to' => 'nullable|exists:users,id']);
+        
+        $conversation->update(['assigned_to' => $request->assigned_to]);
+        
+        flash('Conversation assigned successfully.')->success();
+        
         return redirect()->back();
     }
 }

@@ -1,3 +1,4 @@
+<div class="p-8 bg-obsidian-glass shadow-2xl rounded-3xl border border-[#464554] mb-10 overflow-hidden">
 @include($class->views['detail.content.header'])
 
 @foreach($class->tables as $table_key => $table_name)
@@ -36,3 +37,4 @@
 @endforeach
 
 @include($class->views['detail.content.footer'])
+</div>

@@ -18,6 +18,7 @@ class OmnichatChannel extends Model
         'identifier',
         'credentials',
         'is_active',
+        'is_ai_enabled',
     ];
 
     protected $casts = [
